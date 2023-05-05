@@ -14,7 +14,6 @@ function App() {
       console.log("LL",currentUser);
       return <Navigate to="/login" />;
     }
-console.log(">>>",children);
     return children
   };
 
