@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import Add from "../img/addAvatar.png";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
-import { auth, db, storage } from "../firebase";
+import { auth, storage,db } from "../firebase";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { doc, setDoc } from "firebase/firestore";
 import { useNavigate, Link } from "react-router-dom";
-
+// import db from '../firebase';
 const Register = () => {
   const [err, setErr] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -36,15 +36,15 @@ console.log("data",displayName,email,password,file);
               photoURL: downloadURL,
             });
             //create user on firestore
-            await setDoc(doc(db, "users", res.user.uid), {
-              uid: res.user.uid,
-              displayName,
-              email,
-              photoURL: downloadURL,
-            });
-
+            await setDoc(doc(db,'users',res.user.uid),{
+              uid:res.user.uid,
+              name: displayName,
+              email: email,
+              photoURL:downloadURL,
+            })
+            console.log("go",downloadURL);
             //create empty user chats on firestore
-            await setDoc(doc(db, "userChats", res.user.uid), {});
+            await setDoc(doc(db,"userChats", res.user.uid), {});
             navigate("/");
           } catch (err) {
             console.log(err);
