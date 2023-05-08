@@ -15,7 +15,7 @@ const Chats = () => {
         setChats(doc.data());
       });
 
-      console.log("LLKKK", unsub())
+
       return () => {
         unsub();
       };
@@ -23,7 +23,7 @@ const Chats = () => {
 
     currentUser.uid && getChats();
   }, [currentUser.uid]);
-
+  console.log("LLKKK", chats)
   const handleSelect = (u) => {
     dispatch({ type: "CHANGE_USER", payload: u });
   };
@@ -40,7 +40,7 @@ const Chats = () => {
         >
           <img src={chat[1].userInfo.photoURL} alt="" />
           <div className="userChatInfo">
-            <span>{chat[1].userInfo.displayName}</span>
+            <span>{chat[1].userInfo.displayname}</span>
             <p>{chat[1].lastMessage?.text}</p>
           </div>
         </div>
